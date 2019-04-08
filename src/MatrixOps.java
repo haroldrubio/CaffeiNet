@@ -69,6 +69,35 @@ public class MatrixOps {
     }
 
     /**
+     * Given a vector A, normalizes the vector returns a unit vector pointing in the direction of A
+     * @param vector A double vector
+     * @return A double unit vector
+     */
+    public static double[] normalize(double[] vector){
+        int vectorDims = vector.length;
+        double norm = MatrixOps.l2Norm(vector);
+        double[] normalizedVec = new double[vectorDims];
+        for(int i = 0; i < vectorDims; i++){
+            normalizedVec[i] = vector[i] / norm;
+        }
+        return normalizedVec;
+    }
+
+    /**
+     * Given vector A, get the length of the vector according to the l2 norm
+     * @param vector A double vector
+     * @return The l2 norm
+     */
+    public static double l2Norm(double[] vector){
+        int vectorDims = vector.length;
+        double norm = 0;
+        for(int i = 0; i < vectorDims; i++){
+            norm += Math.pow(vector[i], 2);
+        }
+        return Math.sqrt(norm);
+    }
+
+    /**
      * Given matrix A, return A^T, which swaps the rows and columns of A
      * @param matrix A double matrix
      * @return The transpose of the given matrix
@@ -95,6 +124,53 @@ public class MatrixOps {
             result[i] = matrix[i][column];
         }
         return result;
+    }
+
+    /**
+     * Constructs a matrix with a specified number of rows and columns
+     * @param numRows An int
+     * @param numCols An int
+     * @return A matrix with entries in the interval (-1.0, 1.0)
+     */
+    public static double[][] randomMatrix(int numRows, int numCols){
+        double[][] randMatrix = new double[numRows][numCols];
+        double flipSign, randValue;
+        for(int i = 0; i < numRows; i++){
+            for(int j = 0; j < numCols; j++){
+                flipSign = Math.random(); randValue = Math.random();
+                randMatrix[i][j] = (flipSign > 0.5) ? randValue : (-1*randValue);
+            }
+        }
+        return randMatrix;
+    }
+
+    /**
+     * Constructs a vector with a specified dimensionality
+     * @param dimensions An int
+     * @return A vector with entries in the interval (-1.0, 1.0)
+     */
+    public static double[] randomVector(int dimensions){
+        double[] randVector = new double[dimensions];
+        double flipSign, randValue;
+        for(int i = 0; i < dimensions; i++){
+                flipSign = Math.random(); randValue = Math.random();
+                randVector[i] = (flipSign > 0.5) ? randValue : (-1*randValue);
+        }
+        return randVector;
+    }
+
+    /**
+     * Given vectors A and B in this order, computes the difference A - B component wise
+     * @param vector1 A double vector
+     * @param vector2 A double vector
+     * @return Difference between the two arguments
+     */
+    public static double[] difference(double[] vector1, double[] vector2){
+        int numDims = vector1.length;
+        double[] diffVector = new double[numDims];
+        for(int i = 0; i < numDims; i++)
+            diffVector[i] = vector1[i] - vector2[i];
+        return diffVector;
     }
 
 }
