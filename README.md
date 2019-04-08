@@ -1,9 +1,4 @@
 # CaffeiNet
-### (Currently Under Construction)
-## What is it?
-CaffeiNet is a deep learning framework focused on having clean, interpretable source code in order for people who are new to deep
-learning to understand what's happening at the implementation level. However, this means trading computational efficiency for readability
-at times. As such, this framework is not expected to handle data at the practical level.
 ## Motivation
 My name is Harold Rubio and I am a junior year Computer Science student at the University of Massachusetts - Amherst. I have taken the
 courses: CS383, which is a junior level introduction to artificial intelligence (however, during the semester I took it, the course was
@@ -26,8 +21,8 @@ in computer science.
 
 ## Todo List
 My hope is to implement the models that were mentioned in CS690D by building everything, down to the foundation, from scratch.
-- Fundamentals
-  - Matrix Operations and Statistics
+~~- Fundamentals~~
+  ~~- Matrix Operations and Statistics~~
 - Computational Graphs
 - Feed-Foward Neural Network
 - Recurrent Neural Network (RNN)
