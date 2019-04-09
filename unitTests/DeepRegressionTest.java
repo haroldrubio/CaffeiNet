@@ -8,7 +8,7 @@ public class DeepRegressionTest {
     @Test
     void singleDim(){
         double convergence = 0.01;
-        double batchLoss = 0;
+        double batchLoss = 0, previousBatchLoss = 0;
         Random generateInput = new Random();
         for(int tests = 0; tests < numTests; tests++){
             int MAX_ITERS = 1500, MAX_VAL = 5;
@@ -62,20 +62,17 @@ public class DeepRegressionTest {
                     lossMatrix[i] = difference;
                     lossVector[i] = MatrixOps.l2Norm(difference);
                 }
+                previousBatchLoss = batchLoss;
                 batchLoss = MatrixOps.l2Norm(lossVector);
                 //System.out.printf("Batch Loss: %5.4f\n", batchLoss);
                 outputLayer.backward(lossMatrix);
                 outputLayer.backward(null);
                 //-----------------------Train network-----------------------
 
-                //-----------------------Print parameters-----------------------
-                //hiddenLayer.printParameters();
-                //outputLayer.printParameters();
-                //-----------------------Print parameters-----------------------
-
             }
-            if(batchLoss >= convergence) System.err.printf("Loss not converged: %5.4f\n", batchLoss);
-            assertTrue(batchLoss < convergence);
+            double changeInLoss = Math.abs(previousBatchLoss - batchLoss);
+            if(changeInLoss >= convergence) System.err.printf("Loss not converged: delta=%5.4f\n", changeInLoss);
+            assertTrue(changeInLoss < convergence);
         }
     }
 }
