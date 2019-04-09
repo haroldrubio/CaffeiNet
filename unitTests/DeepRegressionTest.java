@@ -9,11 +9,11 @@ public class DeepRegressionTest {
     void singleDim(){
         double convergence = 0.01;
         double batchLoss = 0;
+        Random generateInput = new Random();
         for(int tests = 0; tests < numTests; tests++){
-            int MAX_ITERS = 1000, MAX_VAL = 5;
+            int MAX_ITERS = 1500, MAX_VAL = 5;
             int inputDim = 1, outputDim = 1, hiddenDim = 3, batchSize = 10;
             double lr = 0.01;
-            Random generateInput = new Random();
             //-----------------------Initialize network variables-----------------------
             double[][] hidden = MatrixOps.randomMatrix(inputDim + 1, hiddenDim);
             double[][] toOutput = MatrixOps.randomMatrix(hiddenDim, outputDim);
@@ -42,13 +42,15 @@ public class DeepRegressionTest {
             double[] difference;
             double[][] predicted;
             double[][] lossMatrix = new double[batchSize][outputDim];
+            int slope = generateInput.nextInt(10);
+            int intercept = generateInput.nextInt(10);
             //-----------------------Train network-----------------------
             for(int iteration = 0; iteration < MAX_ITERS; iteration++){
                 //-----------------------Get next batch-----------------------
                 for(int batchNumber = 0; batchNumber < batchSize; batchNumber++){
                     for(int inDims = 0; inDims < inputDim; inDims++) {
                         inputData[batchNumber][inDims] = generateInput.nextDouble() * MAX_VAL;
-                        outputData[batchNumber][inDims] = 3*inputData[batchNumber][inDims] + 2;
+                        outputData[batchNumber][inDims] = slope*inputData[batchNumber][inDims] + intercept;
                     }
                     inputData[batchNumber][inputDim] = 1;
                 }
