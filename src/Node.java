@@ -1,4 +1,15 @@
 import java.util.List;
+
+/** Parent class to all other classes used in the computational graph
+ *  Node follows the standard representation of a node in any graph, containing
+ *  adjacency list to its parents and children such that the union of the two lists
+ *  forms the total adjacency list of its neighbors
+ *
+ *  Provides definitions for interfaces that support forward and backward
+ *  propagation through the network
+ *
+ *  Allows the grouping of multiple computational graph nodes into a single node
+ */
 public abstract class Node {
     private List<Node> children;
     private List<Node> parents;
@@ -27,7 +38,11 @@ public abstract class Node {
         return this.parents;
     }
 
-    public void setChildren(List<Node> children) { this.children = children; }
+    public void setChildren(List<Node> children){
+        this.children = children;
+    }
 
-    public void setParents(List<Node> parents) { this.parents = parents; }
+    public void setParents(List<Node> parents){
+        this.parents = parents;
+    }
 }

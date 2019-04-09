@@ -1,4 +1,11 @@
 import java.util.List;
+
+/** Similar to an input node such that it has no parents but contains variables corresponding to parameters
+ *  of the overarching neural network
+ *
+ *  Supports vectorized representation of the input by accounting for batch size
+ *  Supports mini-batch gradient descent
+ */
 public class ParamNode extends Node {
     private double[][] currentParameters;
     private double[][] pendingUpdate;
@@ -13,6 +20,12 @@ public class ParamNode extends Node {
     public double[][] getCurrentParameters(){
         return currentParameters;
     }
+
+    /**
+     * Caches the gradient of the loss with respect to this set of parameters
+     * @param currentStep Loss gradient
+     * @param batchSize An integer
+     */
     public void passUpdate(double[][] currentStep, int batchSize){
         int inputDimensions = currentParameters.length;
         int outputDimensions = currentParameters[0].length;
@@ -23,6 +36,11 @@ public class ParamNode extends Node {
         }
         numberOfExamples = batchSize;
     }
+
+    /**
+     * Performs the gradient descent update with the learning rate passed as an argument
+     * @param learningRate A double
+     */
     public void updateParameters(double learningRate){
         int inputDimensions = currentParameters.length;
         int outputDimensions = currentParameters[0].length;

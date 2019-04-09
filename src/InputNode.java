@@ -1,4 +1,10 @@
 import java.util.List;
+
+/** Specific type of node that does not have any parents but supports a forward pass
+ *  into the computational graph
+ *
+ *  Does not support a backward pass since the input does not need to be changed
+ */
 public class InputNode extends Node{
     public InputNode(List<Node> children){
         super(children, null);
