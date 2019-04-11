@@ -173,4 +173,21 @@ public class MatrixOps {
         return diffVector;
     }
 
+    /**
+     * Returns the elementwise sum of two matricies
+     * @param matrix1 A double matrix
+     * @param matrix2 A double matrix
+     * @return The sum of the two matrix arguments
+     */
+    public static double[][] matrixAdd(double[][] matrix1, double[][] matrix2){
+        int numRows = matrix1.length, numCols = matrix1[0].length;
+        double[][] sum = new double[numRows][numCols];
+        for(int i = 0; i < numRows; i++){
+            for(int j = 0; j < numCols; j++){
+                sum[i][j] = matrix1[i][j] + matrix2[i][j];
+            }
+        }
+        return sum;
+    }
+
 }

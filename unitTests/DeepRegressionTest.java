@@ -64,7 +64,7 @@ public class DeepRegressionTest {
                 }
                 previousBatchLoss = batchLoss;
                 batchLoss = MatrixOps.l2Norm(lossVector);
-                //System.out.printf("Batch Loss: %5.4f\n", batchLoss);
+                //System.out.printf("%d, %5.4f\n",iteration, batchLoss);
                 outputLayer.backward(lossMatrix);
                 outputLayer.backward(null);
                 //-----------------------Train network-----------------------
