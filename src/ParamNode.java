@@ -9,12 +9,16 @@ import java.util.List;
 public class ParamNode extends Node {
     private double[][] currentParameters;
     private double[][] pendingUpdate;
+    private double[][] currentVelocity;
+    private double[][] previousVelocity;
     private int numberOfExamples;
     public ParamNode(List<Node> children, double[][] currentParameters) {
         super(children, null);
         int numRows = currentParameters.length, numCols = currentParameters[0].length;
         this.currentParameters = currentParameters;
         this.pendingUpdate = new double[numRows][numCols];
+        this.currentVelocity = new double[numRows][numCols];
+        this.previousVelocity = new double[numRows][numCols];
         this.numberOfExamples = 0;
     }
     public double[][] getCurrentParameters(){
@@ -38,15 +42,23 @@ public class ParamNode extends Node {
     }
 
     /**
-     * Performs the gradient descent update with the learning rate passed as an argument
-     * @param learningRate A double
+     * Performs the gradient descent update with the learning rate and hyperparameter passed as an argument
+     * Type of gradient descent: mini-batch with Nesterov Accerlated Gradient
+     * @param learningRate A double hyperparameter
+     * @param momentum A double hyperparameter
      */
-    public void updateParameters(double learningRate){
+    public void updateParameters(double learningRate, double momentum){
         int inputDimensions = currentParameters.length;
         int outputDimensions = currentParameters[0].length;
+        double nextUpdate;
         for(int i = 0; i < inputDimensions; i++){
             for(int j = 0; j < outputDimensions; j++){
-                currentParameters[i][j] -= learningRate * (pendingUpdate[i][j] / numberOfExamples);
+                previousVelocity[i][j] = currentVelocity[i][j];
+                currentVelocity[i][j] = momentum * currentVelocity[i][j] - learningRate * pendingUpdate[i][j];
+                nextUpdate = (1 + momentum) * currentVelocity[i][j] - momentum * previousVelocity[i][j];
+                currentParameters[i][j] += nextUpdate / numberOfExamples;
+                //Below: Vanilla Mini-Batch GD update
+                //currentParameters[i][j] -= learningRate*(pendingUpdate[i][j]/ numberOfExamples);
                 pendingUpdate[i][j] = 0;
             }
         }
