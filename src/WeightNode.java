@@ -2,10 +2,12 @@ import java.util.List;
 public class WeightNode extends CompNode{
     private double[][] weights;
     private double learningRate;
+    private double momentum;
     private ParamNode parameters;
-    public WeightNode(List<Node> children, List<Node> parents, double learningRate){
+    public WeightNode(List<Node> children, List<Node> parents, double learningRate, double momentum){
         super(children, parents);
         this.learningRate = learningRate;
+        this.momentum = momentum;
         this.f1 = new OneVarFunction() {
             @Override
             public double[][] f(double[][] input) {
@@ -57,7 +59,7 @@ public class WeightNode extends CompNode{
         List<Node> currentParents = this.getParents();
         double[][] nextGradient = null;
         if(loss == null)
-            parameters.updateParameters(learningRate);
+            parameters.updateParameters(learningRate, momentum);
         else{
             int batchSize = loss.length;
             //First send the next update to the parameters
