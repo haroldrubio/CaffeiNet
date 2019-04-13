@@ -12,9 +12,19 @@ public abstract class CompNode extends Node{
     protected TwoVarFunction f2;
     protected OneVarDerivative[] derivatives1;
     protected TwoVarDerivative[] derivatives2;
+    protected double[][] hiddenState;
+    protected double[][] prevHidden;
     public CompNode(List<Node> children, List<Node> parents) {
         super(children, parents);
     }
     abstract void forward(double[][] input);
     abstract void backward(double[][] loss);
+
+    public double[][] getHiddenState(){
+        return this.hiddenState;
+    }
+
+    public double[][] getPrevHidden(){
+        return this.prevHidden;
+    }
 }

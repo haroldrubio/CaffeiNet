@@ -1,7 +1,5 @@
 import java.util.List;
 public class WeightNode extends CompNode{
-    private double[][] hiddenState;
-    private double[][] prevHidden;
     private double[][] weights;
     private double learningRate;
     private ParamNode parameters;
@@ -42,7 +40,7 @@ public class WeightNode extends CompNode{
                 weights = parameters.getCurrentParameters();
             }
         this.prevHidden = input;
-        this.hiddenState = MatrixOps.matrixMatrix(input, weights);
+        this.hiddenState = this.f1.f(input);
         CompNode nextComp;
         List<Node> currentChildren = this.getChildren();
         if(currentChildren != null)
@@ -74,6 +72,10 @@ public class WeightNode extends CompNode{
                     nextComp = (CompNode) n;
                     nextComp.backward(nextGradient);
                 }
+    }
+
+    public void setLearningRate(double learningRate) {
+        this.learningRate = learningRate;
     }
 
     public double[][] getHiddenState(){
