@@ -44,10 +44,12 @@ public class ParamNode extends Node {
     /**
      * Performs the gradient descent update with the learning rate and hyperparameter passed as an argument
      * Type of gradient descent: mini-batch with Nesterov Accerlated Gradient
+     * This specific form of NAG is provided by the CS231n github.io page
      * @param learningRate A double hyperparameter
      * @param momentum A double hyperparameter
+     * @param decay A double hyperparameter
      */
-    public void updateParameters(double learningRate, double momentum){
+    public void updateParameters(double learningRate, double momentum, double decay){
         int inputDimensions = currentParameters.length;
         int outputDimensions = currentParameters[0].length;
         double nextUpdate;
@@ -56,7 +58,7 @@ public class ParamNode extends Node {
                 previousVelocity[i][j] = currentVelocity[i][j];
                 currentVelocity[i][j] = momentum * currentVelocity[i][j] - learningRate * pendingUpdate[i][j];
                 nextUpdate = (1 + momentum) * currentVelocity[i][j] - momentum * previousVelocity[i][j];
-                currentParameters[i][j] += nextUpdate / numberOfExamples;
+                currentParameters[i][j] += (nextUpdate / numberOfExamples) - decay * currentParameters[i][j];
                 //Below: Vanilla Mini-Batch GD update
                 //currentParameters[i][j] -= learningRate*(pendingUpdate[i][j]/ numberOfExamples);
                 pendingUpdate[i][j] = 0;

@@ -1,4 +1,8 @@
 import java.util.List;
+
+/** A non-linear activation function that is applied element wise
+ *  and squishes values to [-1, 1]
+ */
 public class TanNode extends CompNode{
     public TanNode(List<Node> children, List<Node> parents){
         super(children, parents);
@@ -18,6 +22,11 @@ public class TanNode extends CompNode{
         };
     }
 
+    /**
+     * Given a mini-batch of the previous hidden layer, applies the tanh function element wise
+     * @param input A double matrix
+     * @return Squished values of the input matrix
+     */
     private double[][] elementWiseTan(double[][] input){
         int numRows = input.length, numCols = input[0].length;
         double[][] tanVals = new double[numRows][numCols];
@@ -28,9 +37,13 @@ public class TanNode extends CompNode{
         }
         return tanVals;
     }
-
+    /**
+     * Given the loss from a child node, multiply each element by its corresponding derivative
+     * @param loss A double matrix
+     * @return Derivative of loss with respect to the TanNode
+     */
     private double[][] elementWiseDeriv(double[][] loss){
-        int numRows = loss.length, numCols = loss[0].length;
+        int numRows = this.hiddenState.length, numCols = this.hiddenState[0].length;
         double[][] nextLoss = new double[numRows][numCols];
         double elementDerivative;
         for(int i = 0; i < numRows; i++){
@@ -42,6 +55,11 @@ public class TanNode extends CompNode{
         return nextLoss;
     }
 
+    /**
+     * Computes this node's function on the input, caches the values and passes
+     * its value to its children
+     * @param input A double matrix
+     */
     public void forward(double[][] input){
         this.hiddenState = this.f1.f(input);
         this.prevHidden = input;
@@ -55,6 +73,13 @@ public class TanNode extends CompNode{
                 }
             }
     }
+
+    /**
+     * Performs backpropagation by applying this node's derivative function on the loss
+     *
+     * Keep passing a null gradient if null was received in order to signal a parameter update
+     * @param loss A double matrix
+     */
     public void backward(double[][] loss){
         CompNode nextComp;
         List<Node> currentParents = this.getParents();
