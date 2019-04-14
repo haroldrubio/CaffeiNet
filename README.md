@@ -23,8 +23,8 @@ in computer science.
 My hope is to implement the models that were mentioned in CS690D by building everything, down to the foundation, from scratch.
 - ~~Fundamentals~~
   - ~~Matrix Operations and Statistics~~
-- Computational Graphs
-- Feed-Foward Neural Network
+- ~~Computational Graphs~~
+- ~~Feed-Foward Neural Network~~
 - Recurrent Neural Network (RNN)
   - Gated Recurrent Unit RNN
   - Long Short Term Memory (LSTM) RNN
