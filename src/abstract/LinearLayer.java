@@ -18,8 +18,8 @@ public abstract class LinearLayer extends CompNode{
 
         this.inputDim = inputDim + 1;
         this.hiddenDim = hiddenDim;
-        this.lr = 0.01;
-        this.mu = 0.9;
+        this.lr = lr;
+        this.mu = mu;
         //-----------------------Initialize network variables-----------------------
         hidden = MatrixOps.randomMatrix(inputDim + 1, hiddenDim);
         hiddenParameters = new ParamNode(null, hidden);
