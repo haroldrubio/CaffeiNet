@@ -7,9 +7,9 @@ public abstract class LossNode extends CompNode{
     }
     public void forward(double[][] predicted){
         predictions = predicted;
-        batchLoss = this.f1.f(predicted);
     }
     public void backward(double[][] correct){
+        batchLoss = this.f1.f(correct);
         CompNode nextComp;
         List<Node> currentParents = this.getParents();
         double[][] nextGradient = null;
@@ -23,4 +23,16 @@ public abstract class LossNode extends CompNode{
                     nextComp.backward(nextGradient);
                 }
     }
+
+    public void printLoss(){
+        if(batchLoss == null) return;
+        int batchSize = batchLoss.length;
+        double sumLoss = 0;
+        for(int i = 0; i < batchSize; i++){
+            sumLoss += Math.pow(batchLoss[i][0], 2);
+        }
+        sumLoss = Math.sqrt(sumLoss);
+        System.out.printf("Batch loss: %5.3f\n", sumLoss);
+    }
+
 }
