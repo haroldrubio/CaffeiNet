@@ -146,6 +146,7 @@ public class WeightNode extends CompNode{
      * Prints the current weights for this node's parameters
      */
     public void printParameters(){
+        if(weights == null) return;
         int numRows = weights.length, numCols = weights[0].length;
         System.out.println("--------------Weights---------------");
         System.out.print("{");

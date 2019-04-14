@@ -9,6 +9,12 @@ public class InputNode extends Node{
     public InputNode(List<Node> children){
         super(children, null);
     }
+
+    /**
+     * Given a mini-batch of examples, propagate it forward through the input node's children
+     * than can perform a computation
+     * @param input A double matrix
+     */
     public void forward(double[][] input){
         List<Node> currentChildren = super.getChildren();
         CompNode nextComputation;

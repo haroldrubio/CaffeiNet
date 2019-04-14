@@ -8,7 +8,7 @@ public abstract class LinearLayer extends CompNode{
      * passes through its components
      */
     protected int inputDim, hiddenDim;
-    protected double lr, mu;
+    protected double lr, mu, decay;
     protected double[][] hidden;
     protected ParamNode hiddenParameters;
     protected WeightNode hiddenLayer;
@@ -20,6 +20,7 @@ public abstract class LinearLayer extends CompNode{
         this.hiddenDim = hiddenDim;
         this.lr = lr;
         this.mu = mu;
+        this.decay = decay;
         //-----------------------Initialize network variables-----------------------
         hidden = MatrixOps.randomMatrix(inputDim + 1, hiddenDim);
         hiddenParameters = new ParamNode(null, hidden);
