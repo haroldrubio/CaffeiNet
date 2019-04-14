@@ -1,18 +1,18 @@
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A feed-forward layer that performs the calculation Y = f(XW) given a mini-batch of examples X
- * Encapsulates a WeightNode, ParamNode and TanNode and facilitates the forward and backward
- * passes through its components
- */
-public class LinearLayer extends CompNode{
-    private int inputDim, hiddenDim;
-    private double lr, mu;
-    private double[][] hidden;
-    private ParamNode hiddenParameters;
-    private WeightNode hiddenLayer;
-    private TanNode nonlinearity;
+public abstract class LinearLayer extends CompNode{
+    /**
+     * A feed-forward layer that performs the calculation Y = f(XW) given a mini-batch of examples X
+     * Encapsulates a WeightNode, ParamNode and TanNode and facilitates the forward and backward
+     * passes through its components
+     */
+    protected int inputDim, hiddenDim;
+    protected double lr, mu;
+    protected double[][] hidden;
+    protected ParamNode hiddenParameters;
+    protected WeightNode hiddenLayer;
+    protected ActivationNode nonlinearity;
     public LinearLayer(List<Node> children, List<Node> parents, int inputDim, int hiddenDim, double lr, double mu, double decay){
         super(children, parents);
 
@@ -24,26 +24,20 @@ public class LinearLayer extends CompNode{
         hidden = MatrixOps.randomMatrix(inputDim + 1, hiddenDim);
         hiddenParameters = new ParamNode(null, hidden);
         hiddenLayer = new WeightNode(null, null, lr, mu, decay);
-        nonlinearity = new TanNode(null, null);
         //-----------------------Initialize network variables-----------------------
 
         //-----------------------Connect Computational Graph-----------------------
         ArrayList<Node> hiddenParents = new ArrayList<>();
         hiddenParents.add(hiddenParameters);
         ArrayList<Node> hiddenChildren = new ArrayList<>();
-        hiddenChildren.add(nonlinearity);
-        ArrayList<Node> nonlinearParents = new ArrayList<>();
-        nonlinearParents.add(hiddenLayer);
-        ArrayList<Node> nonlinearChildren = new ArrayList<>();
         hiddenLayer.setParents(hiddenParents); hiddenLayer.setChildren(hiddenChildren);
-        nonlinearity.setParents(nonlinearParents); nonlinearity.setChildren(nonlinearChildren);
         //-----------------------Connect Computational Graph-----------------------
 
-        //-----------------------Connect Overarching I/O-----------------------
+        //-----------------------Connect Overarching Input-----------------------
         this.setParents(hiddenParents);
-        this.setChildren(nonlinearChildren);
-        //-----------------------Connect Overarching I/O-----------------------
+        //-----------------------Connect Overarching Input-----------------------
 
+        //Note: Activation gets defined in concrete subclass
     }
 
     /**
@@ -83,3 +77,4 @@ public class LinearLayer extends CompNode{
     }
 
 }
+
