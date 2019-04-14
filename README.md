@@ -29,3 +29,12 @@ My hope is to implement the models that were mentioned in CS690D by building eve
   - Gated Recurrent Unit RNN
   - Long Short Term Memory (LSTM) RNN
 - Transformer
+
+## References
+[1] A Primer on Neural Network Models for Natural Language Processing  
+    https://jair.org/index.php/jair/article/view/11030/26198  
+[2] UMass Amherst class CS682 Neural Networks: A Modern Introduction  
+    https://compsci682-fa18.github.io/index.html  
+[3] Resources from UMass Amherst class CS690D Deep Learning for Natural Language Processing  
+[4] Stanford class CS231n Convolutional Neural Networks for Visual Recognition  
+    http://cs231n.github.io  
