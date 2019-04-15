@@ -58,15 +58,7 @@ public class WeightNode extends CompNode{
             }
         this.prevHidden = input;
         this.hiddenState = this.f1.f(input);
-        CompNode nextComp;
-        List<Node> currentChildren = this.getChildren();
-        if(currentChildren != null)
-            for(Node n: getChildren()){
-                if(n instanceof CompNode){
-                   nextComp = (CompNode) n;
-                   nextComp.forward(hiddenState);
-                }
-            }
+        super.passToChildren(hiddenState);
     }
 
     /**
@@ -78,8 +70,6 @@ public class WeightNode extends CompNode{
      * @param loss A double matrix
      */
     public void backward(double[][] loss){
-        CompNode nextComp;
-        List<Node> currentParents = this.getParents();
         double[][] nextGradient = null;
         if(loss == null)
             parameters.updateParameters(learningRate, momentum, decay);
@@ -91,12 +81,7 @@ public class WeightNode extends CompNode{
             //Then send the signal backwards
             nextGradient = this.derivatives1[0].deriv(loss);
         }
-        if(currentParents != null)
-            for(Node n: currentParents)
-                if(n instanceof CompNode) {
-                    nextComp = (CompNode) n;
-                    nextComp.backward(nextGradient);
-                }
+        super.passToChildren(nextGradient);
     }
 
     // These methods allow the implementation of annealing any of the gradient descent update

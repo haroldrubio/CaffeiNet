@@ -71,6 +71,30 @@ public abstract class LinearLayer extends CompNode{
     }
 
     /**
+     * Sets this node's learning rate
+     * @param learningRate A double
+     */
+    public void setLearningRate(double learningRate) {
+        this.hiddenLayer.setLearningRate(learningRate);
+    }
+
+    /**
+     * Sets this node's momentum coefficient
+     * @param momentum A double
+     */
+    public void setMomentum(double momentum) {
+        this.hiddenLayer.setMomentum(momentum);
+    }
+
+    /**
+     * Set this node's weight decay coefficient
+     * @param decay A double
+     */
+    public void setDecay(double decay) {
+        this.hiddenLayer.setDecay(decay);
+    }
+
+    /**
      * Prints the parameter's corresponding to the hidden layer's parameter node
      */
     public void printParameters(){

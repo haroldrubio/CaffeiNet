@@ -13,15 +13,7 @@ public abstract class ActivationNode extends CompNode{
     public void forward(double[][] input){
         this.hiddenState = this.f1.f(input);
         this.prevHidden = input;
-        CompNode nextComp;
-        List<Node> currentChildren = this.getChildren();
-        if(currentChildren != null)
-            for(Node n: getChildren()){
-                if(n instanceof CompNode){
-                    nextComp = (CompNode) n;
-                    nextComp.forward(hiddenState);
-                }
-            }
+        super.passToChildren(hiddenState);
     }
 
     /**
@@ -31,17 +23,10 @@ public abstract class ActivationNode extends CompNode{
      * @param loss A double matrix
      */
     public void backward(double[][] loss){
-        CompNode nextComp;
-        List<Node> currentParents = this.getParents();
         double[][] nextGradient = null;
         //Send the signal backwards
         if(loss != null)
             nextGradient = this.derivatives1[0].deriv(loss);
-        if(currentParents != null)
-            for(Node n: currentParents)
-                if(n instanceof CompNode) {
-                    nextComp = (CompNode) n;
-                    nextComp.backward(nextGradient);
-                }
+        super.passToParents(nextGradient);
     }
 }

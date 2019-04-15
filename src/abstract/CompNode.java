@@ -20,6 +20,29 @@ public abstract class CompNode extends Node{
     abstract void forward(double[][] input);
     abstract void backward(double[][] loss);
 
+    protected void passToParents(double[][] loss){
+        CompNode nextComp;
+        List<Node> currentParents = this.getParents();
+        if(currentParents != null)
+            for(Node n: currentParents)
+                if(n instanceof CompNode) {
+                    nextComp = (CompNode) n;
+                    nextComp.backward(loss);
+                }
+    }
+
+    protected void passToChildren(double[][] nextValue){
+        CompNode nextComp;
+        List<Node> currentChildren = this.getChildren();
+        if(currentChildren != null)
+            for(Node n: getChildren()){
+                if(n instanceof CompNode){
+                    nextComp = (CompNode) n;
+                    nextComp.forward(nextValue);
+                }
+            }
+    }
+
     public double[][] getHiddenState(){
         return this.hiddenState;
     }

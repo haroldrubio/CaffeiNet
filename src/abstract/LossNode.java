@@ -9,20 +9,13 @@ public abstract class LossNode extends CompNode{
         predictions = predicted;
     }
     public void backward(double[][] correct){
-        CompNode nextComp;
-        List<Node> currentParents = this.getParents();
         double[][] nextGradient = null;
         //Send the signal backwards
         if(correct != null) {
             batchLoss = this.f1.f(correct);
             nextGradient = this.derivatives1[0].deriv(correct);
         }
-        if(currentParents != null)
-            for(Node n: currentParents)
-                if(n instanceof CompNode) {
-                    nextComp = (CompNode) n;
-                    nextComp.backward(nextGradient);
-                }
+        super.passToParents(nextGradient);
     }
 
     public void printLoss(){
