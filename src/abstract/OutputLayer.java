@@ -103,5 +103,17 @@ public abstract class OutputLayer extends CompNode{
         lossNode.printLoss();
     }
 
+    public void calculateLoss(double[][] correct){
+        lossNode.calculateLoss(correct);
+    }
+
+    public double[][] getPredictions(){
+        return lossNode.predictions;
+    }
+
+    public double getLoss(){
+        return lossNode.getLoss();
+    }
+
 }
 

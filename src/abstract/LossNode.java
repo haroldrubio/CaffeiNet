@@ -18,6 +18,10 @@ public abstract class LossNode extends CompNode{
         super.passToParents(nextGradient);
     }
 
+    protected void calculateLoss(double[][] correct){
+        batchLoss = this.f1.f(correct);
+    }
+
     public void printLoss(){
         if(batchLoss == null) return;
         int batchSize = batchLoss.length;

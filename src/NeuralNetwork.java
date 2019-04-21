@@ -22,6 +22,12 @@ public class NeuralNetwork {
         this.addLayer(linearLayer);
     }
 
+    public void addClassifierLayer(int hiddenDims, int outputDims){
+        CompNode linearLayer = new ClassifierLayer(null, null, hiddenDims, outputDims,
+                this.learningRate, this.momentum, this.decay);
+        this.addLayer(linearLayer);
+    }
+
     public void addRegressionLayer(int hiddenDims, int outputDims){
         CompNode regressionLayer = new RegressionLayer(null, null, hiddenDims, outputDims,
                 this.learningRate, this.momentum, this.decay);
@@ -95,6 +101,26 @@ public class NeuralNetwork {
     public void printLoss(){
         OutputLayer last = (OutputLayer) lastLayer;
         last.printLoss();
+    }
+
+    public void calculateLoss(double[][] correct){
+        OutputLayer last = (OutputLayer) lastLayer;
+        last.calculateLoss(correct);
+    }
+
+    public double getLoss(){
+        OutputLayer last = (OutputLayer) lastLayer;
+        return last.getLoss();
+    }
+
+    public double getAccuracy(double[][] correct){
+        ClassifierLayer last = (ClassifierLayer) lastLayer;
+        return last.getAccuracy(correct);
+    }
+
+    public double[][] getPredictions(){
+        OutputLayer last = (OutputLayer) lastLayer;
+        return last.getPredictions();
     }
 
 }
