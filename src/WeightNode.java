@@ -81,7 +81,7 @@ public class WeightNode extends CompNode{
             //Then send the signal backwards
             nextGradient = this.derivatives1[0].deriv(loss);
         }
-        super.passToChildren(nextGradient);
+        super.passToParents(nextGradient);
     }
 
     // These methods allow the implementation of annealing any of the gradient descent update
