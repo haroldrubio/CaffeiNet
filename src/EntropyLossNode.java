@@ -27,7 +27,7 @@ public class EntropyLossNode extends LossNode{
                 predictedVector = predictions[i];
                 correctVector = correct[i];
                 for(int k = 0; k < numClasses; k++)
-                    totalLoss[i][0] += correctVector[k] * Math.log(predictedVector[k]);
+                    totalLoss[i][0] += -1 * correctVector[k] * Math.log(predictedVector[k]);
             }
             return totalLoss;
         }
@@ -43,11 +43,12 @@ public class EntropyLossNode extends LossNode{
     private double[][] crossEntropyGrad(double[][] correct){
             int batchSize = correct.length, numClasses = correct[0].length;
             double[][] gradient = new double[batchSize][numClasses];
-            double[] predictedVector;
+            double[] predictedVector, correctVector;
             for(int i = 0; i < batchSize; i++){
                 predictedVector = predictions[i];
+                correctVector = correct[i];
                 for(int k = 0; k < numClasses; k++)
-                    gradient[i][k] += predictedVector[k] - 1;
+                    gradient[i][k] +=  correctVector[k] * predictedVector[k] - 1;
             }
             return gradient;
         }
