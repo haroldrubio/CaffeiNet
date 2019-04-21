@@ -48,7 +48,8 @@ public class EntropyLossNode extends LossNode{
                 predictedVector = predictions[i];
                 correctVector = correct[i];
                 for(int k = 0; k < numClasses; k++)
-                    gradient[i][k] +=  correctVector[k] * (predictedVector[k] - 1);
+                    gradient[i][k] = (correctVector[k] * (predictedVector[k] - 1) )+
+                            ((1 - correctVector[k]) * predictedVector[k]);
             }
             return gradient;
         }
