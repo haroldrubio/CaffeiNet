@@ -26,7 +26,18 @@ public abstract class LossNode extends CompNode{
             sumLoss += Math.pow(batchLoss[i][0], 2);
         }
         sumLoss = Math.sqrt(sumLoss);
-        System.out.printf("Batch loss: %5.3f\n", sumLoss);
+        System.out.printf("%5.3f\n", sumLoss);
+    }
+
+    public double getLoss(){
+        if(batchLoss == null) return -1;
+        int batchSize = batchLoss.length;
+        double sumLoss = 0;
+        for(int i = 0; i < batchSize; i++){
+            sumLoss += Math.pow(batchLoss[i][0], 2);
+        }
+        sumLoss = Math.sqrt(sumLoss);
+        return sumLoss;
     }
 
 }
