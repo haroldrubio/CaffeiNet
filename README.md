@@ -25,6 +25,7 @@ My hope is to implement the models that were mentioned in CS690D by building eve
   - ~~Matrix Operations and Statistics~~
 - ~~Computational Graphs~~
 - ~~Feed-Foward Neural Network~~
+- Feature Complete First Release
 - Recurrent Neural Network (RNN)
   - Gated Recurrent Unit RNN
   - Long Short Term Memory (LSTM) RNN
