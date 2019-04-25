@@ -20,6 +20,10 @@ public abstract class CompNode extends Node{
     abstract void forward(double[][] input);
     abstract void backward(double[][] loss);
 
+    /**
+     * Passes a double matrix, usually a loss matrix, to the parents as the backwards step
+     * @param loss A double matrix
+     */
     protected void passToParents(double[][] loss){
         CompNode nextComp;
         List<Node> currentParents = this.getParents();
@@ -30,6 +34,11 @@ public abstract class CompNode extends Node{
                     nextComp.backward(loss);
                 }
     }
+
+    /**
+     * Passes a double matrix, usually the hidden state of the current node, to the children as the forwards step
+     * @param nextValue A double matrix
+     */
 
     protected void passToChildren(double[][] nextValue){
         CompNode nextComp;

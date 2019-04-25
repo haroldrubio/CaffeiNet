@@ -1,6 +1,9 @@
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A linear layer using the sigmoid non-linearity
+ */
 public class LinearLayerSig extends LinearLayer{
     public LinearLayerSig(List<Node> children, List<Node> parents, int inputDim, int hiddenDim, double lr, double mu, double decay){
         //-----------------------Construct partial graph-----------------------

@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A feed-forward layer that uses tanh() as its activation function
+ * A linear layer using the tanh nonlinearity
  */
 public class LinearLayerTan extends LinearLayer{
     public LinearLayerTan(List<Node> children, List<Node> parents, int inputDim, int hiddenDim, double lr, double mu, double decay){

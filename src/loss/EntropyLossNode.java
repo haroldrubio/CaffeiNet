@@ -1,5 +1,9 @@
 import java.util.List;
 
+/**
+ * A terminating node in the computational graph that computes cross entropy loss and its gradient
+ * directly with respect to the hidden state values through the softmax operation
+ */
 public class EntropyLossNode extends LossNode{
         public EntropyLossNode(List<Node> children, List<Node> parents){
             super(children, parents);
@@ -18,7 +22,13 @@ public class EntropyLossNode extends LossNode{
                     }
             };
         }
-        private double[][] crossEntropy(double[][] correct){
+
+    /**
+     * Calculates the cross entropy loss per batch
+     * @param correct A double matrix of one hot encoded vectors of the correct classes
+     * @return A double vector of the cross entropy loss
+     */
+    private double[][] crossEntropy(double[][] correct){
             //Let the correct matrix be one-hot encodings of the classes
             int batchSize = correct.length, numClasses = correct[0].length;
             double[][] totalLoss = new double[batchSize][1];

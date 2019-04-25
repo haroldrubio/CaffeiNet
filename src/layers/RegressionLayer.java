@@ -1,5 +1,9 @@
 import java.util.ArrayList;
 import java.util.List;
+
+/**
+ * A layer that projects into the output space and adds on a squared loss node
+ */
 public class RegressionLayer extends OutputLayer{
     public RegressionLayer(List<Node> children, List<Node> parents, int hiddenDim, int outputDim, double lr, double mu, double decay){
         //-----------------------Construct partial graph-----------------------

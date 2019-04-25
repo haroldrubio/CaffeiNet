@@ -1,6 +1,11 @@
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A layer that performs classification
+ * Contains a projection into the output space, a softmax normalization and the computation
+ * of cross entropy loss
+ */
 public class ClassifierLayer extends OutputLayer{
     protected SoftmaxNode softmax;
     public ClassifierLayer(List<Node> children, List<Node> parents, int hiddenDim, int outputDim, double lr, double mu, double decay){
@@ -25,6 +30,14 @@ public class ClassifierLayer extends OutputLayer{
         //-----------------------Connect remaining parts of the graph-----------------------
     }
 
+    /**
+     * Given one-hot encoded vectors for classification, gets the accuracy of the predictions
+     * made by the network
+     *
+     * These predictions are obtained from taking an arg max over the softmax probabilities
+     * @param correct A double matrix of correct labels
+     * @return A double of the accuracy of the predictions
+     */
     public double getAccuracy(double[][] correct){
         int numExamples = correct.length, numClasses = correct[0].length;
         int numCorrect = 0;
