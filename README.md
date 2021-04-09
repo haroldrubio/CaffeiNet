@@ -1,4 +1,4 @@
-# CaffeiNet
+# CaffeiNet (Archived/Inactive)
 ## Motivation
 My name is Harold Rubio and I am a junior year Computer Science student at the University of Massachusetts - Amherst. I have taken the
 courses: CS383, which is a junior level introduction to artificial intelligence (however, during the semester I took it, the course was
@@ -25,11 +25,11 @@ My hope is to implement the models that were mentioned in CS690D by building eve
   - ~~Matrix Operations and Statistics~~
 - ~~Computational Graphs~~
 - ~~Feed-Foward Neural Network~~
-- Feature Complete First Release
-- Recurrent Neural Network (RNN)
-  - Gated Recurrent Unit RNN
-  - Long Short Term Memory (LSTM) RNN
-- Transformer
+- ~~Feature Complete First Release~~
+- ~~Recurrent Neural Network (RNN)~~
+  - ~~Gated Recurrent Unit RNN~~
+  - ~~Long Short Term Memory (LSTM) RNN~~
+- ~~Transformer~~
 
 ## References
 [1] A Primer on Neural Network Models for Natural Language Processing  
